@@ -5,8 +5,8 @@ const Logo = () => {
   return (
     <>
       <div className='flex items-center'>
-        <Image src='/assets/logo.png' width={90} height={90} />
-        <h1 className='ml-[10px]'>MUSCLE.md</h1>
+        <Image src='/assets/logo.png' width={80} height={80} />
+        <h2 className='ml-[10px]'>MUSCLE.md</h2>
       </div>
     </>
   );
