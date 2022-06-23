@@ -23,16 +23,46 @@ datasource db {
 // }
 
 //db 모델 snake_case
+
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  kakao_token  String?  @unique
-  google_token String?  @unique
-  create_at    DateTime @default(now())
-  update_at    DateTime @updatedAt
-  nick         String
-  weight       Int
-  date         Date[]
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  create_at     DateTime  @default(now())
+  update_at     DateTime  @updatedAt
+  name          String?
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("USER")
+  accounts      Account[]
+  sessions      Session[]
+  weight        Int?
+  date          Date[]
+}
+
+model Account {
+  id                       String  @id @default(uuid())
+  type                     String
+  provider                 String
+  providerAccountId        String
+  userId                   String
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refresh_token            String?
+  refresh_token_expires_in Int?
+  access_token             String?
+  expires_in               Int?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  expires      DateTime
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Date {
