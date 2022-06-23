@@ -16,6 +16,25 @@ function MyApp({ Component, pageProps }: AppProps) {
               rgba(30, 32, 34, 1) 100%
             );
           }
+          #__next {
+            width: 100vw;
+            height: 100vh;
+          }
+          h1 {
+            font-size: 50px;
+          }
+          h2 {
+            font-size: 40px;
+          }
+          h3 {
+            font-size: 30px;
+          }
+          h4 {
+            font-size: 20px;
+          }
+          h5 {
+            font-size: 10px;
+          }
         `}
       </style>
       <Component {...pageProps} />
