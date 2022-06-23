@@ -8,7 +8,47 @@ generator client {
 //기본 설정 ( 개발 모드)
 datasource db {
   provider = "sqlite"
-  url      = "file:mydb.db"
+  url      = "file:./mydb.db"
 }
 
-//db 모델
+// generator client {
+//   provider        = "prisma-client-js"
+//   previewFeatures = ["referentialIntegrity"]
+// }
+
+// datasource db {
+//   provider = "mysql"
+//   url      = env("DATABASE_URL")
+//   referentialIntegrity = "prisma"
+// }
+
+//db 모델 snake_case
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  kakao_token  String?  @unique
+  google_token String?  @unique
+  create_at    DateTime @default(now())
+  update_at    DateTime @updatedAt
+  nick         String
+  weight       Int
+  date         Date[]
+}
+
+model Date {
+  id        String     @id @default(cuid())
+  date_time DateTime   @default(now())
+  userId    String?
+  user      User?      @relation(fields: [userId], references: [id])
+  exercise  Exercise[]
+}
+
+model Exercise {
+  id     String  @id @default(cuid())
+  name   String
+  weight Int
+  count  Int     @default(0)
+  set    Int     @default(0)
+  dateId String?
+  date   Date?   @relation(fields: [dateId], references: [id])
+}
