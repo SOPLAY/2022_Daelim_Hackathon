@@ -1,5 +1,5 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,6 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           #__next {
             width: 100vw;
             height: 100vh;
+            display: flex;
+            justify-content: center;
+            aling-content: center;
           }
           h1 {
             font-size: 50px;
