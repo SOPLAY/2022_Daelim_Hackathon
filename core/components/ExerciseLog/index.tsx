@@ -1,9 +1,13 @@
 import BodyContainer from '@components/common/BodyContainer';
 import Container from '@components/common/Container';
 import Logo from '@components/common/Logo';
+import MyListbox from '@components/common/MyListbox';
 import React from 'react';
+import { useRouter } from 'next/router';
 
 const ExerciseLog = () => {
+  const route = useRouter();
+  console.log(route.query.eng);
   return (
     <div className='w-[1440px] h-[1024px] flex justify-center content-center my-auto'>
       <Container>
@@ -14,7 +18,7 @@ const ExerciseLog = () => {
           <div className='flex  w-1/3 h-5/6 mr-10'>
             <Container>
               <div className='flex flex-col mx-auto my-auto pl-5'>
-                <BodyContainer width={400} type={'target'} />
+                <BodyContainer width={400} type={'summary'} />
               </div>
             </Container>
           </div>
@@ -22,7 +26,7 @@ const ExerciseLog = () => {
             <Container>
               <div>
                 <h1 className='flex justify-center mb-[100px] mt-[70px]'>
-                  인클라인 벤치프레스
+                  {route.query.target}
                 </h1>
               </div>
               <div className='flex justify-center items-center'>

@@ -3,11 +3,15 @@
     {
       "id": "0",
       "mainTarget": "승모근",
+      "eng": "Traps",
+      "humanType": "back",
       "subTarget": ["슈러그", "업라이트 로우"]
     },
     {
       "id": "1",
       "mainTarget": "대흉근",
+      "eng": "Pecs",
+      "humanType": "front",
       "subTarget": [
         "플렛 벤치프레스",
         "인클라인 벤치프레스",
@@ -23,6 +27,8 @@
     {
       "id": "2",
       "mainTarget": "광배근",
+      "eng": "Lats",
+      "humanType": "back",
       "subTarget": [
         "풀업",
         "친업",
@@ -41,11 +47,15 @@
     {
       "id": "3",
       "mainTarget": "척추기립근",
+      "eng": "LowerBack",
+      "humanType": "back",
       "subTarget": ["데드리프트", "백 익스텐션"]
     },
     {
       "id": "4",
       "mainTarget": "복근",
+      "eng": "Obliques",
+      "humanType": "front",
       "subTarget": [
         "싯업",
         "크런치",
@@ -58,6 +68,8 @@
     {
       "id": "5",
       "mainTarget": "전면, 측면삼각근",
+      "eng": "Deltoids",
+      "humanType": "front",
       "subTarget": [
         "밀리터리 프레스",
         "숄더 프레스",
@@ -70,6 +82,8 @@
     {
       "id": "6",
       "mainTarget": "후면삼각근",
+      "eng": "Back-Deltoids",
+      "humanType": "back",
       "subTarget": [
         "벤트오버 레터럴 레이즈",
         "케이블 리버스 플라이",
@@ -79,6 +93,8 @@
     {
       "id": "7",
       "mainTarget": "이두근",
+      "eng": "Biceps",
+      "humanType": "front",
       "subTarget": [
         "바벨 컬",
         "해머 컬",
@@ -93,6 +109,8 @@
     {
       "id": "8",
       "mainTarget": "삼두근",
+      "eng": "Triceps",
+      "humanType": "back",
       "subTarget": [
         "케이블 트라이셉 푸쉬 다운",
         "스탠딩 트라이셉 로프 익스텐션",
@@ -107,11 +125,15 @@
     {
       "id": "9",
       "mainTarget": "전완근",
+      "eng": "Forearms",
+      "humanType": "front",
       "subTarget": ["리스트컬", "리버스 리스트컬", "리버스 익스텐션 롤"]
     },
     {
       "id": "10",
       "mainTarget": "대둔근",
+      "humanType": "back",
+      "eng": "Glutes",
       "subTarget": [
         "스쿼트",
         "바벨 브릿지",
@@ -123,11 +145,15 @@
     {
       "id": "11",
       "mainTarget": "대퇴사두근",
+      "eng": "Quads",
+      "humanType": "front",
       "subTarget": ["스쿼트", "핵스쿼트", "프론트스쿼트", "레그프레스", "런지"]
     },
     {
       "id": "12",
       "mainTarget": "대퇴이두근",
+      "eng": "Glutes",
+      "humanType": "back",
       "subTarget": [
         "스쿼트",
         " 스티프 레그 데드리프트",
@@ -138,6 +164,8 @@
     {
       "id": "13",
       "mainTarget": "비복근",
+      "eng": "Calves",
+      "humanType": "back",
       "subTarget": ["카프레이즈"]
     }
   ]

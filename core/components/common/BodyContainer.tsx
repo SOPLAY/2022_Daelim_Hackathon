@@ -3,22 +3,27 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { atomHumanType } from '../../atoms/atomHumanType';
+import ExerciseList from '@lib/ExerciseList.json';
 
 const BodyContainer = ({ ...props }) => {
   const { type } = props;
   const [humanType, setHumanType] = useRecoilState(atomHumanType);
   const route = useRouter();
+  const human = route.query.id
+    ? ExerciseList.data[`${route.query.id}`].humanType
+    : null;
+
   const onClick = (query) => {
     route.push('/target' + `?target=${query}`);
   };
-
+  console.log();
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox={`${
         type === 'main'
           ? '0 0 1669.48 1384.07'
-          : humanType === 'back'
+          : humanType || human === 'back'
           ? '875 0 835 1384.07'
           : '0 0 835 1384.07'
       }`}
@@ -106,6 +111,30 @@ const BodyContainer = ({ ...props }) => {
             {`.Hamstrings{fill:#f7f7f7}`}
             {`.LowerBack{fill:#f7f7f7;}`}
             {`.${route.query['target']}{fill:#ff513d;}`}
+          </style>
+        )}
+
+        {type === 'summary' && (
+          <style>
+            {`.BaseLine{fill:black;}`}
+            {`.BaseBody{fill:#f7f7f7;}`}
+            {`.Quads{fill:#f7f7f7;}`}
+            {`.Obliques{fill:#f7f7f7;}`}
+            {`.Biceps{fill:#f7f7f7;}`}
+            {`.Pecs{fill:#f7f7f7;}`}
+            {`.Traps{fill:#f7f7f7;}`}
+            {`.Calves{fill:#f7f7f7;}`}
+            {`.Deltoids{fill:#f7f7f7;}`}
+            {`.Forearms{fill:#f7f7f7;}`}
+            {`.Back-Forearms{fill:#f7f7f7;}`}
+            {`.Back-Deltoids{fill:#f7f7f7;}`}
+            {`.LowTraps{fill:#f7f7f7;}`}
+            {`.Triceps{fill:#f7f7f7;}`}
+            {`.Lats{fill:#f7f7f7;}`}
+            {`.Glutes{fill:#f7f7f7;}`}
+            {`.Hamstrings{fill:#f7f7f7}`}
+            {`.LowerBack{fill:#f7f7f7;}`}
+            {`.${route.query['eng']}{fill:#ff513d;}`}
           </style>
         )}
       </defs>

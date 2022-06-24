@@ -1,17 +1,36 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import ExerciseList from '../.././lib/ExerciseList.json';
+import ExerciseList from '@lib/ExerciseList.json';
+import { useRouter } from 'next/router';
 
 const MyListbox = () => {
   const [selected, setSelected] = useState(ExerciseList.data[0]);
   const [subSelected, setSubSelected] = useState(selected.subTarget);
+  const [userPick, setUserPick] = useState(['']);
+  const route = useRouter();
+  let target = typeof userPick === 'object' ? userPick[0] : userPick;
+  const onClick = (target) => {
+    route.push(
+      './exerciselog' +
+        `?target=${target}&eng=${selected.eng}&id=${selected.id}`
+    );
+  };
   useEffect(() => {
     setSubSelected(selected.subTarget);
   }, [selected]);
+  console.log(userPick);
+  console.log(selected.eng);
+
   return (
     <div className='flex flex-col mt-[20px] ml-[80px]'>
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox
+        value={selected}
+        onChange={(data) => {
+          setSelected(data);
+          setUserPick(['']);
+        }}
+      >
         <div className='relative mt-1 w-[400px]'>
           <Listbox.Button className='relative w-full cursor-pointer rounded-lg bg-white py-5 pl-5 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 2xl:text-2xl'>
             <span className='block truncate'>{selected.mainTarget}</span>
@@ -62,10 +81,12 @@ const MyListbox = () => {
         </div>
       </Listbox>
 
-      <Listbox value={subSelected} onChange={setSubSelected}>
+      <Listbox value={subSelected} onChange={setUserPick}>
         <div className='relative mt-[300px] w-[400px]'>
           <Listbox.Button className='relative w-full cursor-pointer rounded-lg bg-white py-5 pl-5 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 2xl:text-2xl'>
-            <span className='block truncate'>{subSelected[0]}</span>
+            <span className='block truncate'>
+              {typeof userPick === 'object' ? subSelected[0] : target}
+            </span>
             <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
               <SelectorIcon
                 className='h-5 w-5 text-gray-400'
@@ -112,6 +133,17 @@ const MyListbox = () => {
           </Transition>
         </div>
       </Listbox>
+      <div className='flex justify-end mt-[100px]'>
+        <button
+          className='bg-white w-[100px] h-20 2xl:text-2xl rounded-lg shadow-md cursor-pointer'
+          type='submit'
+          onClick={() => {
+            onClick(target);
+          }}
+        >
+          선택
+        </button>
+      </div>
     </div>
   );
 };
