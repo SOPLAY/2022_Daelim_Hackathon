@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { atomHumanType } from '../../atoms/humanType';
+import { atomHumanType } from '../../atoms/atomHumanType';
 
 const BodyContainer = ({ ...props }) => {
   const { type } = props;
