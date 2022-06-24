@@ -138,7 +138,50 @@ export default async function handler(
         .json({ success: false, message: '해당 id는 존재하지 않습니다.' });
 
     return res.status(202).json({ success: true, message: '삭제 성공' });
+
+    //목록 수정
   } else if (req.method === 'PUT') {
+    const { id, count, weight, set } = req.body;
+
+    let data = await prisma.user.findUnique({
+      where: { email: email },
+      select: {
+        date: {
+          orderBy: {
+            date_time: 'desc',
+          },
+          take: 1,
+          select: {
+            date_time: true,
+            exercise: {
+              select: { id: true },
+            },
+          },
+        },
+      },
+    });
+
+    if (data === null || getDate(data.date[0].date_time + '') !== currentDate) {
+      return res
+        .status(400)
+        .json({ success: false, message: '수정은 당일만 가능합니다.' });
+    } else if (data.date[0].exercise.findIndex((v) => v.id === id) !== -1) {
+      await prisma.exercise.update({
+        where: {
+          id: id,
+        },
+        data: {
+          count: +count,
+          weight: +weight,
+          set: +set,
+        },
+      });
+    } else {
+      return res
+        .status(400)
+        .json({ success: false, message: '해당 id는 없습니다.' });
+    }
+    return res.status(201).json({ success: true, message: '정보 수정 성공' });
   } else {
     return res
       .status(404)
