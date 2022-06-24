@@ -3,7 +3,6 @@ import Container from '../common/Container';
 import Logo from '../common/Logo';
 import Image from 'next/image';
 import MyListbox from '../common/MyListbox';
-import ExerciseList from '../common/ExerciseList.json';
 import BodyContainer from '../common/BodyContainer';
 
 const index = () => {

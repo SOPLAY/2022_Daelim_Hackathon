@@ -6,10 +6,8 @@ import { atomHumanType } from '../../atoms/atomHumanType';
 
 const BodyContainer = ({ ...props }) => {
   const { type } = props;
-  // const [humanType, setHumanType] = useState('front');
   const [humanType, setHumanType] = useRecoilState(atomHumanType);
   const route = useRouter();
-
   const onClick = (query) => {
     route.push('/target' + `?target=${query}`);
   };
@@ -17,7 +15,6 @@ const BodyContainer = ({ ...props }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      // viewBox={`${type === 'main' ? '0 0 1669.48 1384.07' : '0 0 835 1384.07'}`}
       viewBox={`${
         type === 'main'
           ? '0 0 1669.48 1384.07'
@@ -327,6 +324,7 @@ const BodyContainer = ({ ...props }) => {
       <g
         className='Back-Forearms'
         onClick={() => {
+          setHumanType('front');
           onClick('Forearms');
         }}
       >
