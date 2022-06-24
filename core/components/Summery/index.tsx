@@ -1,8 +1,24 @@
 import BodyContainer from '@components/common/BodyContainer';
 import Container from '@components/common/Container';
-import React, { useEffect } from 'react';
+import api from '@lib/api';
+import React, { useEffect, useState } from 'react';
+import ExerciseList from '@lib/ExerciseList.json';
 
 const index = () => {
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    const getUserData = async () =>
+      await api.user
+        .get({})
+        .then((res) => setUserData(res.data.data))
+        .catch((err) => console.log(err.response.data));
+    !userData.length && getUserData();
+  }, [userData]);
+
+  //영어 명칭 가져 오는 함수
+  const getEng = (name) =>
+    ExerciseList.data.find((v) => v.subTarget.includes(name)).eng;
+
   const testData = [
     {
       id: 1,
@@ -20,6 +36,7 @@ const index = () => {
       value: 3000,
     },
   ];
+
   const totalVol = testData.reduce((acc, cur) => acc + cur.value, 0);
 
   return (
