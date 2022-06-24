@@ -1,16 +1,22 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { withRouter } from 'next/router';
 
-const Logo = () => {
+const Logo = ({ router }) => {
   return (
-    <Link href='/'>
-      <div className='flex items-center cursor-pointer'>
-        <Image src='/assets/logo.png' width={80} height={80} />
-        <h2 className='ml-[10px]'>MUSCLE.md</h2>
+    <>
+      <div
+        className="flex items-center cursor-pointer"
+        onClick={() => router.push('/')}
+      >
+        <Image src="/assets/logo.png" width={80} height={80} />
+        <div className="flex items-center">
+          <Image src="/assets/logotext.png" width={180} height={30} />
+          <h2 className="ml-1">.md</h2>
+        </div>
       </div>
-    </Link>
+    </>
   );
 };
 
-export default Logo;
+export default withRouter(Logo);

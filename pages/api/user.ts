@@ -76,10 +76,10 @@ export default async function handler(
 
     let targetdate = await prisma.date
       .findMany({
-        take: 1,
         orderBy: {
           date_time: 'desc',
         },
+        take: 1,
         where: {
           userId: id,
         },
@@ -87,10 +87,7 @@ export default async function handler(
       .then((res) => res[0]);
 
     //만약 해당하는 날짜에 대한 db 가 존재하지 않는 경우 생성한다.
-    if (
-      !targetdate ||
-      new Date(targetdate.date_time + '').toLocaleDateString() !== currentDate
-    ) {
+    if (!targetdate || getDate(targetdate.date_time + '') !== currentDate) {
       targetdate = await prisma.date.create({ data: { userId: id } });
     }
 
