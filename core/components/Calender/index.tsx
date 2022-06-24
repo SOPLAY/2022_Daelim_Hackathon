@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
 import { Calendar, Col, Radio, Row, Select, Typography } from 'antd';
 import Container from '@components/common/Container';
 import InformationCard from './InformationCard';
+import api from '@lib/api';
 
 const Calender = () => {
   const onPanelChange = (value, mode) => {
     console.log(value.format('YYYY-MM-DD'), mode);
+  };
+
+  const [data, setData] = useState([]);
+
+  const onClick = async (date) => {
+    await api.user
+      .get({ date: new Date(date).toLocaleDateString() })
+      .then((res) => {
+        console.log(res.data.data);
+        setData(res.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -17,6 +32,7 @@ const Calender = () => {
             <div className='flex justify-center items-center h-[680px] w-[530px]'>
               <div className='h-[90%] relative'>
                 <Calendar
+                  onChange={(data) => onClick(data)}
                   fullscreen={true}
                   headerRender={({ value, type, onChange, onTypeChange }) => {
                     const start = 0;
@@ -25,7 +41,6 @@ const Calender = () => {
                     const current = value.clone();
                     const localeData = value.localeData();
                     const months = [];
-
                     for (let i = 0; i < 12; i++) {
                       current.month(i);
                       months.push(localeData.monthsShort(current));
@@ -131,9 +146,25 @@ const Calender = () => {
           <div className='p-[40px]'>
             <h3>More Information</h3>
             <div className='flex flex-col items-center h-[530px] overflow-scroll'>
-              <InformationCard />
-              <InformationCard />
-              <InformationCard />
+              {data ? (
+                data.map((v, i) => {
+                  const { name, weight, count, set } = v;
+                  console.log(name, weight, count, set);
+                  return (
+                    <InformationCard
+                      name={name}
+                      weight={weight}
+                      count={count}
+                      set={set}
+                      key={i}
+                    />
+                  );
+                })
+              ) : (
+                <div>
+                  <h3>없음</h3>
+                </div>
+              )}
             </div>
           </div>
         </Container>

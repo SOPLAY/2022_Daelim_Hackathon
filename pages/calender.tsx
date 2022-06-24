@@ -1,27 +1,11 @@
 import Calender from '@components/Calender';
 import Container from '@components/common/Container';
 import Logo from '@components/common/Logo';
-import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 const Home = () => {
-  const [data, setData] = useState('');
-
-  useEffect(() => {
-    const getInformation = async () => {
-      await axios
-        .get('/api/user')
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    };
-    !data && getInformation();
-  }, [data]);
   const router = useRouter();
   return (
     <div className='w-[1440px] h-[1024px] flex justify-center content-center my-auto'>
