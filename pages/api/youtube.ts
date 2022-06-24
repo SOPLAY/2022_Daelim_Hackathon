@@ -10,7 +10,7 @@ export default async function handler(
   if (session === null || req.method !== 'GET')
     return res
       .status(404)
-      .json({ success: false, message: '잘못된 접근입니다.' });
+      .json({ success: false, message: '잘못된  접근입니다.' });
 
   let { q } = req.query;
   q = typeof q === 'object' ? q[0] : q;
