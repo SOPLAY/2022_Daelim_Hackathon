@@ -9,11 +9,14 @@ const MyListbox = () => {
   const [subSelected, setSubSelected] = useState(selected.subTarget);
   const [userPick, setUserPick] = useState(['']);
   const route = useRouter();
+
   let target = typeof userPick === 'object' ? userPick[0] : userPick;
   const onClick = (target) => {
     route.push(
       './exerciselog' +
-        `?target=${target}&eng=${selected.eng}&id=${selected.id}`
+        `?target=${target ? target : selected.subTarget[0]}&eng=${
+          selected.eng
+        }&id=${selected.id}`
     );
   };
   useEffect(() => {
