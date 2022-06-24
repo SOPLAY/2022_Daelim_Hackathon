@@ -1,9 +1,9 @@
-import Calender from '@components/Calender';
 import Container from '@components/common/Container';
+import React from 'react';
+import Summery from '@components/Summery';
 import Logo from '@components/common/Logo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 const Home = () => {
   const router = useRouter();
@@ -51,9 +51,7 @@ const Home = () => {
             </svg>
           </div>
         </div>
-        <div className='flex mx-auto my-auto'>
-          <Calender />
-        </div>
+        <Summery />
       </Container>
     </div>
   );
