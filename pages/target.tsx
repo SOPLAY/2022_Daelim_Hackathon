@@ -5,7 +5,7 @@ import Logo from '../core/components/common/Logo';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-const target = () => {
+const Home = () => {
   const [youtubeApi, setYoutubeApi] = useState([]);
   const route = useRouter();
   const search = {
@@ -134,4 +134,4 @@ const target = () => {
   );
 };
 
-export default target;
+export default Home;

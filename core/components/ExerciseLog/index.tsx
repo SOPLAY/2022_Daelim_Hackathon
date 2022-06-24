@@ -1,7 +1,6 @@
 import BodyContainer from '@components/common/BodyContainer';
 import Container from '@components/common/Container';
 import Logo from '@components/common/Logo';
-import MyListbox from '@components/common/MyListbox';
 import React from 'react';
 
 const ExerciseLog = () => {
