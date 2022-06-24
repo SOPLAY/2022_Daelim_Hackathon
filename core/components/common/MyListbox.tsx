@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import ExerciseList from './ExerciseList.json';
+import ExerciseList from '../.././lib/ExerciseList.json';
 
 const MyListbox = () => {
   const [selected, setSelected] = useState(ExerciseList.data[0]);
