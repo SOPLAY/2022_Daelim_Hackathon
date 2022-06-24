@@ -29,5 +29,9 @@ const api = {
     delete: async (data: TypeUserDelete) =>
       await axios.delete('/api/user', { params: { ...data } }),
   },
+  youtube: {
+    get: async (data: string) =>
+      await axios.get('/api/youtube', { params: { q: data } }),
+  },
 };
 export default api;
