@@ -21,7 +21,7 @@ const ExerciseLog = () => {
         <div className='flex  w-1/3 h-[90%] mr-10'>
           <Container>
             <div className='flex flex-col mx-auto my-auto pl-5 pointer-events-none'>
-              <BodyContainer width={'100%'} type={'summary'} />
+              <BodyContainer width={'100%'} type={'done'} />
             </div>
           </Container>
         </div>
