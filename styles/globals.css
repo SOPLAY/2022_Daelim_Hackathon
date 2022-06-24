@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+    .loading{
+      @apply bg-slate-500 rounded-md animate-pulse;
+    }
+}
