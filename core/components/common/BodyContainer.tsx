@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { atomHumanType } from '../../atoms/atomHumanType';
 import ExerciseList from '@lib/ExerciseList.json';
@@ -12,6 +11,8 @@ const BodyContainer = ({ ...props }) => {
   const human = route.query.id
     ? ExerciseList.data[`${route.query.id}`].humanType
     : null;
+  console.log(human);
+  console.log(humanType);
 
   const onClick = (query) => {
     route.push('/target' + `?target=${query}`);
@@ -23,7 +24,7 @@ const BodyContainer = ({ ...props }) => {
       viewBox={`${
         type === 'main'
           ? '0 0 1669.48 1384.07'
-          : humanType || human === 'back'
+          : human === 'back'
           ? '875 0 835 1384.07'
           : '0 0 835 1384.07'
       }`}
@@ -39,13 +40,14 @@ const BodyContainer = ({ ...props }) => {
             {`.Biceps{fill:#f7f7f7;}`}
             {`.Pecs{fill:#f7f7f7;}`}
             {`.Traps{fill:#f7f7f7;}`}
+            {`.Back-Traps{fill:#f7f7f7;}`}
+
             {`.Calves{fill:#f7f7f7;}`}
             {`.Deltoids{fill:#f7f7f7;}`}
             {`.Forearms{fill:#f7f7f7;}`}
             {`.Back-Forearms{fill:#f7f7f7;}`}
 
             {`.Back-Deltoids{fill:#f7f7f7;}`}
-            {`.LowTraps{fill:#f7f7f7;}`}
             {`.Triceps{fill:#f7f7f7;}`}
             {`.Lats{fill:#f7f7f7;}`}
             {`.Glutes{fill:#f7f7f7;}`}
@@ -57,13 +59,13 @@ const BodyContainer = ({ ...props }) => {
             {`.Biceps:hover{fill: #ff513d; cursor:pointer}`}
             {`.Pecs:hover{fill: #ff513d; cursor:pointer;}`}
             {`.Traps:hover{fill: #ff513d; cursor:pointer;}`}
+            {`.Back-Traps:hover{fill: #ff513d; cursor:pointer;}`}
             {`.Calves:hover{fill: #ff513d; cursor:pointer;}`}
             {`.Deltoids:hover{fill: #ff513d; cursor:pointer;}`}
             {`.Forearms:hover{fill: #ff513d; cursor:pointer;}`}
             {`.Back-Forearms:hover{fill: #ff513d; cursor:pointer;}`}
 
             {`.Back-Deltoids:hover{fill: #ff513d; cursor:pointer;}`}
-            {/* {`.LowTraps:hover{fill: #ff513d; cursor:pointer;}`} */}
             {`.Triceps:hover{fill: #ff513d; cursor:pointer;}`}
             {`.Lats:hover{fill: #ff513d; cursor:pointer;}`}
             {`.Glutes:hover{fill: #ff513d; cursor:pointer;}`}
@@ -75,18 +77,17 @@ const BodyContainer = ({ ...props }) => {
             {`.Biceps:active{opacity:0.8; cursor:pointer;}`}
             {`.Pecs:active{opacity:0.8; cursor:pointer;}`}
             {`.Traps:active{opacity:0.8; cursor:pointer;}`}
+            {`.Back-Traps:active{opacity:0.8; cursor:pointer;}`}
             {`.Calves:active{opacity:0.8; cursor:pointer;}`}
 
             {`.Deltoids:active{opacity:0.8; cursor:pointer;}`}
             {`.Forearms:active{opacity:0.8; cursor:pointer;}`}
             {`.Back-Forearms:active{opacity:0.8; cursor:pointer;}`}
             {`.Back-Deltoids:active{opacity:0.8; cursor:pointer;}`}
-            {/* {`.LowTraps:active{opacity:0.8; cursor:pointer;}`} */}
             {`.Triceps:active{opacity:0.8; cursor:pointer;}`}
             {`.Lats:active{opacity:0.8; cursor:pointer;}`}
             {`.Glutes:active{opacity:0.8; cursor:pointer;}`}
             {`.Hamstrings:active{opacity:0.8; cursor:pointer;}`}
-            {`.LowerBack:active{opacity:0.8; cursor:pointer;}`}
           </style>
         )}
 
@@ -223,7 +224,7 @@ const BodyContainer = ({ ...props }) => {
         <path d='M458.78,500.62c-.63,10.09-3.09,19.41-4.31,28.87-1.42,11-7.68,15.46-17.59,17.41-11.69,2.3-22.8,7.37-35.09,6.81-7.16-.33-6.94-.13-7.36-7.06-.79-12.95-.65-25.92-.82-38.88-.05-3.33.29-4.43,4.25-3.8,15.16,2.38,30.48,2.43,45.76,1.4C448.73,505,453.41,502.45,458.78,500.62Z' />
       </g>
       <g
-        className='Traps'
+        className='Traps' // 전방
         onClick={() => {
           setHumanType('front');
           onClick('Traps');
@@ -305,7 +306,7 @@ const BodyContainer = ({ ...props }) => {
         <path d='M1412.41,683.79c4.32,7.13,9.3,13.59,11.41,21.75,4.08,15.82,4.52,31.91,4,48.09-.77,22-1.51,43.92-.62,65.89a137.33,137.33,0,0,1-1.48,27.35c-2.66,16.66-2.42,33.47-3.11,50.23a157.18,157.18,0,0,0,7.92,57c1.31,3.9,2.12,7.95,3.55,13.41-5.79-3.87-10.47-6.82-14.94-10-3.17-2.3-5-1.61-7.22,1.5-6.92,9.63-10.75,20.53-13.85,32.86-1.56-3.68-2.55-6.41-3.84-9-1.49-3-3.46-2.93-5.13-.16-3,5-6.09,9.92-8.72,15.09-4.44,8.71-8.81,17.47-12.06,26.73-.47,1.34-.66,3-2.6,3.76-9.35-17.74-19-35.28-24.71-54.77a636.56,636.56,0,0,1-14.54-62.71c-3.11-17-9.89-32.74-15.62-48.86-4.85-13.64-9.88-27.22-14.77-40.84-7-19.38-6.33-39.62-6.63-59.74,0-2.05.92-2.63,2.84-2.11,2.41.64,4.87,1.11,7.27,1.79a78.11,78.11,0,0,0,34.11,1.72c7.51-1.22,15.12-1.89,22.69-2.67,12.19-1.25,23.16-6,33.58-12,8.8-5,13.69-13.39,16.76-22.81,4-12.14,6.07-24.52,4.6-37.34a14.89,14.89,0,0,1,.1-3C1411.38,684.74,1411.72,684.54,1412.41,683.79Z' />
       </g>
       <g
-        className='Traps'
+        className='Back-Traps'
         onClick={() => {
           setHumanType('front');
           onClick('Traps');
@@ -313,10 +314,11 @@ const BodyContainer = ({ ...props }) => {
       >
         <path d='M1350.48,211.24c-8.62-2.18-17.28-4.17-25.83-6.59-15.09-4.28-30.24-8.37-45-13.69-2.17-.78-3.3-1.32-3.25-3.94.19-8.82.17-17.65,0-26.48,0-2.68.69-3.77,3.51-4.06a70.16,70.16,0,0,0,16.94-4.08c3.06-1.14,4.88-.71,6.39,2.36a132.08,132.08,0,0,0,6.9,12.14c10.06,15.84,22,29.94,37.63,40.69,1.07.74,2,1.68,3,2.52Z' />
         <path d='M1195.51,211.85c6.49-5.75,13.2-10.56,19.69-15.66,13.32-10.46,23.36-23.54,31.37-38.25,1.85-3.39,3.57-4.44,7.36-3a39.61,39.61,0,0,0,15.64,2.65c2-.07,3,.28,3.07,2.63.24,9.47-.78,19,.57,28.39.22,1.53-.72,1.85-2,2.29-24,8.47-48.63,14.74-73.28,20.92A10.09,10.09,0,0,1,1195.51,211.85Z' />
-      </g>
-      <g className='LowTraps'>
         <path d='M1275.32,193.67c1.38.36,2.69.6,3.93,1,26.08,9,52.8,15.8,79.54,22.53,2.24.56,7.11.24,2.74,4.94-22.62,24.4-27.89,55.14-31.33,86.49a163,163,0,0,0-.94,17.94,61.29,61.29,0,0,1-8.71,31.84c-8.77,14.89-18.77,29-26.48,44.57-4.14,8.33-8.76,16.4-11.68,25.32-2.69,8.21-6.1,8.81-11.58,2.32a19.35,19.35,0,0,1-2.88-4.64c-9.73-21.93-21.81-42.62-34.35-63A88,88,0,0,1,1220,314.45c.23-18.41-2.89-36.41-7.28-54.23-2.76-11.23-8.41-20.9-15.79-29.68-2.25-2.66-4.16-5.6-6.37-8.29-2.87-3.49-1.27-4.37,2.36-5.28,19.69-4.9,39.35-9.93,58.77-15.84,6.49-2,12.92-4.14,19.38-6.21C1272.47,194.47,1273.9,194.09,1275.32,193.67Z' />
       </g>
+      {/* <g className='LowTraps'>
+        <path d='M1275.32,193.67c1.38.36,2.69.6,3.93,1,26.08,9,52.8,15.8,79.54,22.53,2.24.56,7.11.24,2.74,4.94-22.62,24.4-27.89,55.14-31.33,86.49a163,163,0,0,0-.94,17.94,61.29,61.29,0,0,1-8.71,31.84c-8.77,14.89-18.77,29-26.48,44.57-4.14,8.33-8.76,16.4-11.68,25.32-2.69,8.21-6.1,8.81-11.58,2.32a19.35,19.35,0,0,1-2.88-4.64c-9.73-21.93-21.81-42.62-34.35-63A88,88,0,0,1,1220,314.45c.23-18.41-2.89-36.41-7.28-54.23-2.76-11.23-8.41-20.9-15.79-29.68-2.25-2.66-4.16-5.6-6.37-8.29-2.87-3.49-1.27-4.37,2.36-5.28,19.69-4.9,39.35-9.93,58.77-15.84,6.49-2,12.92-4.14,19.38-6.21C1272.47,194.47,1273.9,194.09,1275.32,193.67Z' />
+      </g> */}
       <g
         className='Glutes'
         onClick={() => {
