@@ -10,8 +10,8 @@ const Calender = () => {
   };
 
   return (
-    <div className='flex justify-center items-center w-full'>
-      <div className='w-[600px]'>
+    <div className='flex justify-center w-full h-full px-10 mt-10'>
+      <div className='flex w-1/2 h-5/6 mr-10'>
         <Container>
           <div className='flex justify-center items-center'>
             <div className='flex justify-center items-center h-[680px] w-[530px]'>
@@ -126,7 +126,7 @@ const Calender = () => {
           </div>
         </Container>
       </div>
-      <div className='w-[600px] h-[680px] ml-[35px]'>
+      <div className='w-[680px] h-[695px]'>
         <Container>
           <div className='p-[40px]'>
             <h3>More Information</h3>
