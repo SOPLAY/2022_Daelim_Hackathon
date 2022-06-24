@@ -1,21 +1,21 @@
-import React from "react";
-import "antd/dist/antd.css";
-import { Calendar, Col, Radio, Row, Select, Typography } from "antd";
-import Container from "@components/common/Container";
-import InformationCard from "./InformationCard";
+import React from 'react';
+import 'antd/dist/antd.css';
+import { Calendar, Col, Radio, Row, Select, Typography } from 'antd';
+import Container from '@components/common/Container';
+import InformationCard from './InformationCard';
 
 const Calender = () => {
   const onPanelChange = (value, mode) => {
-    console.log(value.format("YYYY-MM-DD"), mode);
+    console.log(value.format('YYYY-MM-DD'), mode);
   };
 
   return (
-    <div className="flex justify-center items-center w-full">
-      <div className="w-[600px]">
+    <div className='flex justify-center items-center w-full'>
+      <div className='w-[600px]'>
         <Container>
-          <div className="flex justify-center items-center">
-            <div className="flex justify-center items-center h-[680px] w-[530px]">
-              <div className="h-[90%] relative">
+          <div className='flex justify-center items-center'>
+            <div className='flex justify-center items-center h-[680px] w-[530px]'>
+              <div className='h-[90%] relative'>
                 <Calendar
                   fullscreen={true}
                   headerRender={({ value, type, onChange, onTypeChange }) => {
@@ -33,7 +33,7 @@ const Calender = () => {
 
                     for (let index = start; index < end; index++) {
                       monthOptions.push(
-                        <Select.Option className="month-item" key={`${index}`}>
+                        <Select.Option className='month-item' key={`${index}`}>
                           {months[index]}
                         </Select.Option>
                       );
@@ -45,7 +45,7 @@ const Calender = () => {
 
                     for (let i = year - 10; i < year + 10; i += 1) {
                       options.push(
-                        <Select.Option key={i} value={i} className="year-item">
+                        <Select.Option key={i} value={i} className='year-item'>
                           {i}
                         </Select.Option>
                       );
@@ -79,19 +79,19 @@ const Calender = () => {
                         <Row gutter={8}>
                           <Col>
                             <Radio.Group
-                              size="small"
+                              size='small'
                               onChange={(e) => onTypeChange(e.target.value)}
                               value={type}
                             >
-                              <Radio.Button value="month">Month</Radio.Button>
-                              <Radio.Button value="year">Year</Radio.Button>
+                              <Radio.Button value='month'>Month</Radio.Button>
+                              <Radio.Button value='year'>Year</Radio.Button>
                             </Radio.Group>
                           </Col>
                           <Col>
                             <Select
-                              size="small"
+                              size='small'
                               dropdownMatchSelectWidth={false}
-                              className="my-year-select"
+                              className='my-year-select'
                               onChange={(newYear) => {
                                 const now = value.clone().year(Number(newYear));
                                 onChange(now);
@@ -103,7 +103,7 @@ const Calender = () => {
                           </Col>
                           <Col>
                             <Select
-                              size="small"
+                              size='small'
                               dropdownMatchSelectWidth={false}
                               value={String(month)}
                               onChange={(selectedMonth) => {
@@ -126,14 +126,11 @@ const Calender = () => {
           </div>
         </Container>
       </div>
-      <div className="w-[600px] h-[680px] ml-[35px]">
+      <div className='w-[600px] h-[680px] ml-[35px]'>
         <Container>
-          <div className="p-[40px]">
+          <div className='p-[40px]'>
             <h3>More Information</h3>
-            <div className="flex flex-col items-center h-[530px] overflow-scroll">
-              <InformationCard />
-              <InformationCard />
-              <InformationCard />
+            <div className='flex flex-col items-center h-[530px] overflow-scroll'>
               <InformationCard />
               <InformationCard />
               <InformationCard />

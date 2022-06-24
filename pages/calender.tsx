@@ -1,9 +1,10 @@
 import Calender from '@components/Calender';
 import Container from '@components/common/Container';
 import Logo from '@components/common/Logo';
+import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Home = () => {
   const router = useRouter();
