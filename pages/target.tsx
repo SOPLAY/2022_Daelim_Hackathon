@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Container from '../core/components/common/Container';
 import BodyContainer from '../core/components/common/BodyContainer';
-import Logo from '../core/components/common/Logo';
+
 import { useRouter } from 'next/router';
 import api from '@lib/api';
 import Header from '@components/common/Header';
+import Loading from '@components/common/Loading';
 
 const Home = () => {
   const [youtubeData, setYoutubeData] = useState([]);
@@ -37,7 +38,6 @@ const Home = () => {
         .get(searchData)
         .then((res) => {
           setYoutubeData(res.data.items);
-          console.log(res.data);
         })
         .catch((e) => {
           console.log(e.response);
@@ -60,67 +60,78 @@ const Home = () => {
           </div>
           <div className="flex w-2/3 h-[90%]">
             <Container>
-              <div className="flex flex-col p-10 h-full">
+              <div className="flex flex-col p-7 h-full">
                 <h3>How to work?</h3>
-                <div className="flex flex-col h-full justify-between mt-5 overflow-scroll">
-                  {youtubeData.map((e, i) => {
-                    return (
-                      <div className="mb-5" key={i}>
-                        <Container type={'target'}>
-                          <div className="flex p-5">
-                            <img
-                              className="cursor-pointer"
-                              src={`${youtubeData[i].snippet.thumbnails.default.url}`}
-                              width="120px"
-                              onClick={() =>
-                                window.open(
-                                  `https://www.youtube.com/watch?v=${youtubeData[i].id.videoId}`,
-                                  '_blank'
-                                )
-                              }
-                            />
-                            <div className="ml-5 cursor-pointer">
-                              <h4
+                <div className="flex flex-col h-full justify-between mt-2 overflow-scroll">
+                  {youtubeData.length ? (
+                    youtubeData.map((e, i) => {
+                      return (
+                        <div className="mb-5" key={i}>
+                          <Container type={'target'}>
+                            <div className="flex p-5">
+                              <img
+                                className="cursor-pointer"
+                                src={`${youtubeData[i].snippet.thumbnails.default.url}`}
+                                width="120px"
                                 onClick={() =>
                                   window.open(
                                     `https://www.youtube.com/watch?v=${youtubeData[i].id.videoId}`,
                                     '_blank'
                                   )
                                 }
-                              >
-                                {youtubeData[i].snippet.title.length > 40
-                                  ? youtubeData[i].snippet.title.slice(0, 35) +
-                                    ' ...'
-                                  : youtubeData[i].snippet.title}
-                              </h4>
-                              <h5
-                                className="text-[#7c7c7c] mb-2 cursor-pointer"
-                                onClick={() =>
-                                  window.open(
-                                    `https://www.youtube.com/watch?v=${youtubeData[i].id.videoId}`,
-                                    '_blank'
-                                  )
-                                }
-                              >
-                                {youtubeData[i].snippet.description}
-                              </h5>
-                              <h6
-                                className='text-[#7c7c7c] cursor-pointer"'
-                                onClick={() =>
-                                  window.open(
-                                    `https://www.youtube.com/channel/${youtubeData[i].snippet.channelId}`,
-                                    '_blank'
-                                  )
-                                }
-                              >
-                                {youtubeData[i].snippet.channelTitle}
-                              </h6>
+                              />
+                              <div className="ml-5 cursor-pointer">
+                                <h4
+                                  onClick={() =>
+                                    window.open(
+                                      `https://www.youtube.com/watch?v=${youtubeData[i].id.videoId}`,
+                                      '_blank'
+                                    )
+                                  }
+                                >
+                                  {youtubeData[i].snippet.title.length > 40
+                                    ? youtubeData[i].snippet.title.slice(
+                                        0,
+                                        35
+                                      ) + ' ...'
+                                    : youtubeData[i].snippet.title}
+                                </h4>
+                                <h5
+                                  className="text-[#7c7c7c] mb-2 cursor-pointer"
+                                  onClick={() =>
+                                    window.open(
+                                      `https://www.youtube.com/watch?v=${youtubeData[i].id.videoId}`,
+                                      '_blank'
+                                    )
+                                  }
+                                >
+                                  {youtubeData[i].snippet.description}
+                                </h5>
+                                <h6
+                                  className='text-[#7c7c7c] cursor-pointer"'
+                                  onClick={() =>
+                                    window.open(
+                                      `https://www.youtube.com/channel/${youtubeData[i].snippet.channelId}`,
+                                      '_blank'
+                                    )
+                                  }
+                                >
+                                  {youtubeData[i].snippet.channelTitle}
+                                </h6>
+                              </div>
                             </div>
-                          </div>
-                        </Container>
-                      </div>
-                    );
-                  })}
+                          </Container>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="w-full h-full  overflow-hidden">
+                      <Loading type="pecs" />
+                      <Loading type="pecs" />
+                      <Loading type="pecs" />
+                      <Loading type="pecs" />
+                    </div>
+                  )}
                 </div>
               </div>
             </Container>
