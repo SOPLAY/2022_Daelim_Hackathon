@@ -40,3 +40,4 @@ yarn-error.log*
 # prisma DBdata
 prisma/migrations
 prisma/mydb.db
+\\\prisma/mydb.db-journal
