@@ -12,7 +12,7 @@ const index = () => {
   const getUserData = async () => {
     // setIsLoading(true);
     let data = await api.user
-      .get({})
+      .get({ date: new Date().toLocaleDateString() })
       .then((res) => setUserData(res.data.data))
       .catch((err) => console.log(err.response.data));
     // setIsLoading(false);
