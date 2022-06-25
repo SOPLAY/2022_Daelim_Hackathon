@@ -1,9 +1,6 @@
 import prisma from '@lib/prisma';
-import { PrismaClient } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
-import Kakao from 'next-auth/providers/kakao';
-import { getSession } from 'next-auth/react';
 import KakaoProvider from 'next-auth/providers/kakao';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 interface ResBody {
@@ -41,7 +38,7 @@ export default async function handler(
   //운동 로그 요청
   if (req.method === 'GET') {
     //22/6/2022
-    let date = req.query.date || new Date().toLocaleDateString();
+    let date = getDate(req.query.date + '') || new Date().toLocaleDateString();
     const data = await prisma.user
       .findFirst({
         where: { email: email },

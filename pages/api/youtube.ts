@@ -1,12 +1,29 @@
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import KakaoProvider from 'next-auth/providers/kakao';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import prisma from '@lib/prisma';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req });
+  const session = await getServerSession(
+    { req, res },
+    {
+      providers: [
+        KakaoProvider({
+          clientId: process.env.NEXTAUTH_KAKAO_KEY || '',
+          clientSecret: process.env.NEXTAUTH_KAKAO_SECRET_KEY || '',
+        }),
+        // ...add more providers here
+      ],
+      adapter: PrismaAdapter(prisma),
+      secret: process.env.SECRET,
+    }
+  );
   if (session === null || req.method !== 'GET')
     return res
       .status(404)
