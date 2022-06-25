@@ -16,7 +16,7 @@ const InformationCard = ({
   progress = 10,
 }: TypeInformationCard) => {
   return (
-    <div className="flex items-center w-[500px] h-[150px] bg-white/30 rounded-[20px] border backdrop-blur-md drop-shadow-xl mb-5 justify-between">
+    <div className="flex items-center w-full h-[150px] bg-white/30 rounded-[20px] border backdrop-blur-md drop-shadow-xl mb-5 justify-between">
       <div className="flex items-center ">
         <div className="flex justify-center items-center w-[150px] h-[150px]">
           <Image
@@ -33,7 +33,7 @@ const InformationCard = ({
         </div>
       </div>
       <div className="flex flex-col justify-center items-center mr-10">
-        <h4>Volume</h4>
+        <h4>Day Volume</h4>
         <Progress
           type="circle"
           percent={progress}

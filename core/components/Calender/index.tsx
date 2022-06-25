@@ -15,13 +15,18 @@ const Calender = () => {
   const [isLoading, setLoading] = useState(false);
   const [first, setFirst] = useState(true);
 
+  const [total, setTotal] = useState(0);
   const onClick = async (date) => {
     setLoading(true);
 
     await api.user
       .get({ date: new Date(date).toLocaleDateString() })
       .then((res) => {
-        console.log(res.data.data);
+        let sum = res.data.data.reduce(
+          (acc, cur) => acc + cur.weight * cur.count * cur.set,
+          0
+        );
+        setTotal(sum);
         setData(res.data.data);
       })
       .catch((e) => {
@@ -159,7 +164,7 @@ const Calender = () => {
         <Container>
           <div className="px-[40px]  overflow-hidden box-border">
             <h3>More Information</h3>
-            <div className="flex flex-col items-center h-[550px] overflow-scroll pb-14">
+            <div className="flex flex-col items-center h-[550px] overflow-scroll ">
               {isLoading ? (
                 <>
                   <Loading type="calender" />
@@ -171,14 +176,16 @@ const Calender = () => {
               ) : data.length ? (
                 data.map((v, i) => {
                   const { name, weight, count, set } = v;
-                  console.log(name, weight, count, set);
+
                   return (
                     <InformationCard
                       name={name}
                       weight={weight}
                       count={count}
                       set={set}
-                      progress={10}
+                      progress={Math.round(
+                        ((weight * count * set) / total) * 100
+                      )}
                       key={i}
                     />
                   );
