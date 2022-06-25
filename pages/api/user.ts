@@ -1,8 +1,11 @@
 import prisma from '@lib/prisma';
 import { PrismaClient } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth';
+import Kakao from 'next-auth/providers/kakao';
 import { getSession } from 'next-auth/react';
-
+import KakaoProvider from 'next-auth/providers/kakao';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 interface ResBody {
   success: boolean;
   message: string;
@@ -12,7 +15,20 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResBody>
 ) {
-  const session = await getSession({ req });
+  const session = await getServerSession(
+    { req, res },
+    {
+      providers: [
+        KakaoProvider({
+          clientId: process.env.NEXTAUTH_KAKAO_KEY || '',
+          clientSecret: process.env.NEXTAUTH_KAKAO_SECRET_KEY || '',
+        }),
+        // ...add more providers here
+      ],
+      adapter: PrismaAdapter(prisma),
+      secret: process.env.SECRET,
+    }
+  );
   if (session === null)
     return res
       .status(404)
