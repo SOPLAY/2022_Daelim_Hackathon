@@ -38,12 +38,10 @@ export default async function handler(
   //운동 로그 요청
   if (req.method === 'GET') {
     //22/6/2022
-    let date = req.query.date
+    let date = !req.query.date
       ? new Date().toLocaleDateString()
       : getDate(req.query.date + '');
 
-    console.log('query', !req.query.date);
-    console.log('date', new Date().toLocaleDateString());
     const data = await prisma.user
       .findFirst({
         where: { email: email },
