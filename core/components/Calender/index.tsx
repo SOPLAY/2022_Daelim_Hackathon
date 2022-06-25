@@ -162,9 +162,9 @@ const Calender = () => {
       </div>
       <div className="w-1/2 h-[90%]">
         <Container>
-          <div className="px-[40px]  overflow-hidden box-border">
+          <div className="px-[40px]  overflow-hidden box-border ">
             <h3>More Information</h3>
-            <div className="flex flex-col items-center h-[550px] overflow-scroll ">
+            <div className="flex flex-col items-center h-[500px] overflow-scroll pb-14">
               {isLoading ? (
                 <>
                   <Loading type="calender" />
