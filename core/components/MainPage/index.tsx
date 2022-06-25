@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import Container from '../common/Container';
-import Logo from '../common/Logo';
-import Image from 'next/image';
 import MyListbox from '../common/MyListbox';
 import BodyContainer from '../common/BodyContainer';
 
 const index = () => {
   return (
     <>
-      <div className='flex p-[45px]'>
-        <Logo />
-      </div>
-      <div className='flex mx-auto my-auto'>
-        {/* <Image src='/assets/body.svg' width={800} height={700} /> */}
-        <BodyContainer width={800} type={'main'} />
-        <div className='flex flex-col'>
+      <div className="flex mx-auto my-auto w-full h-full">
+        <div className="flex w-2/3 items-center justify-center">
+          <BodyContainer width={'90%'} type={'main'} />
+        </div>
+        <div className="flex flex-col justify-center w-1/2 items-center">
           <MyListbox />
         </div>
       </div>

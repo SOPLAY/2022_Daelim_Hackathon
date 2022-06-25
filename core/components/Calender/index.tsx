@@ -1,22 +1,57 @@
-import React from "react";
-import "antd/dist/antd.css";
-import { Calendar, Col, Radio, Row, Select, Typography } from "antd";
-import Container from "@components/common/Container";
-import InformationCard from "./InformationCard";
+import React, { useEffect, useState } from 'react';
+import 'antd/dist/antd.css';
+import { Calendar, Col, Radio, Row, Select, Typography } from 'antd';
+import Container from '@components/common/Container';
+import InformationCard from './InformationCard';
+import api from '@lib/api';
+import Loading from '@components/common/Loading';
 
 const Calender = () => {
   const onPanelChange = (value, mode) => {
-    console.log(value.format("YYYY-MM-DD"), mode);
+    console.log(value.format('YYYY-MM-DD'), mode);
   };
 
+  const [data, setData] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const [first, setFirst] = useState(true);
+
+  const [total, setTotal] = useState(0);
+  const onClick = async (date) => {
+    setLoading(true);
+
+    await api.user
+      .get({ date: new Date(date).toLocaleDateString() })
+      .then((res) => {
+        let sum = res.data.data.reduce(
+          (acc, cur) => acc + cur.weight * cur.count * cur.set,
+          0
+        );
+        setTotal(sum);
+        setData(res.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    setLoading(false);
+    setFirst(false);
+  };
+
+  useEffect(() => {
+    first && !data.length && onClick(new Date());
+  });
+
   return (
-    <div className="flex justify-center items-center w-full">
-      <div className="w-[600px]">
+    <div className="flex justify-center w-full h-[90%] px-10">
+      <div className="flex w-1/2 h-[90%] mr-10">
         <Container>
-          <div className="flex justify-center items-center">
-            <div className="flex justify-center items-center h-[680px] w-[530px]">
+          <div className="flex justify-center items-center h-full w-full ">
+            <div className="flex justify-center items-center  w-[400px] ">
               <div className="h-[90%] relative">
                 <Calendar
+                  onChange={(data) => {
+                    setData([]);
+                    onClick(data);
+                  }}
                   fullscreen={true}
                   headerRender={({ value, type, onChange, onTypeChange }) => {
                     const start = 0;
@@ -25,7 +60,6 @@ const Calender = () => {
                     const current = value.clone();
                     const localeData = value.localeData();
                     const months = [];
-
                     for (let i = 0; i < 12; i++) {
                       current.month(i);
                       months.push(localeData.monthsShort(current));
@@ -63,13 +97,13 @@ const Calender = () => {
                           }
                           .ant-picker-calendar .ant-picker-panel {
                             background: none;
-                            font-size: 20px;
+                            font-size: 17px;
                             margin: 0;
                           }
                           .ant-picker-calendar-full
                             .ant-picker-panel
                             .ant-picker-calendar-date {
-                            height: 70px;
+                            height: 50px;
                             margind: 0;
                           }
                         `}</style>
@@ -126,17 +160,41 @@ const Calender = () => {
           </div>
         </Container>
       </div>
-      <div className="w-[600px] h-[680px] ml-[35px]">
+      <div className="w-1/2 h-[90%]">
         <Container>
-          <div className="p-[40px]">
+          <div className="px-[40px]  overflow-hidden box-border ">
             <h3>More Information</h3>
-            <div className="flex flex-col items-center h-[530px] overflow-scroll">
-              <InformationCard />
-              <InformationCard />
-              <InformationCard />
-              <InformationCard />
-              <InformationCard />
-              <InformationCard />
+            <div className="flex flex-col items-center h-[500px] overflow-scroll pb-14">
+              {isLoading ? (
+                <>
+                  <Loading type="calender" />
+                  <Loading type="calender" />
+                  <Loading type="calender" />
+                  <Loading type="calender" />
+                  <Loading type="calender" />
+                </>
+              ) : data.length ? (
+                data.map((v, i) => {
+                  const { name, weight, count, set } = v;
+
+                  return (
+                    <InformationCard
+                      name={name}
+                      weight={weight}
+                      count={count}
+                      set={set}
+                      progress={Math.round(
+                        ((weight * count * set) / total) * 100
+                      )}
+                      key={i}
+                    />
+                  );
+                })
+              ) : (
+                <div>
+                  <h4>해당 날짜에 데이터가 존재하지 않습니다.</h4>
+                </div>
+              )}
             </div>
           </div>
         </Container>

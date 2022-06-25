@@ -5,7 +5,7 @@ type TypeLoading = {
 };
 
 const LoadingContainer = ({ children }) => (
-  <div className="w-full bg-white/25 backdrop-blur-sm rounded-xl max-w-[500px] m-3 p-3 box-border">
+  <div className="w-[96%] bg-white/25 backdrop-blur-sm rounded-xl  m-3 p-3 box-border ">
     {children}
   </div>
 );

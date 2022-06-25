@@ -1,22 +1,24 @@
-import Calender from "@components/Calender";
-import Container from "@components/common/Container";
-import Header from "@components/common/Header";
-import Logo from "@components/common/Logo";
-import React from "react";
+import Calender from '@components/Calender';
+import Auth from '@components/common/Auth';
+import Container from '@components/common/Container';
+import Header from '@components/common/Header';
+import Logo from '@components/common/Logo';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
-const calender = () => {
+const Home = () => {
+  const router = useRouter();
   return (
-    <div className="w-[1440px] h-[1024px] flex justify-center content-center my-auto">
-      <Container>
-        <div className="flex p-[45px]">
-          <Logo />
-        </div>
-        <div className="flex mx-auto my-auto">
+    <Auth auth={true}>
+      <div className="w-[90%] h-[90%] w-max-[1440px] h-max-[1024px] flex justify-center content-center my-auto ">
+        <Container>
+          <Header />
           <Calender />
-        </div>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </Auth>
   );
 };
 
-export default calender;
+export default Home;

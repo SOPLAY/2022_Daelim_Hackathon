@@ -1,15 +1,20 @@
-import Container from "@components/common/Container";
-import ExerciseLog from "@components/ExerciseLog";
-import React from "react";
+import Auth from '@components/common/Auth';
+import Container from '@components/common/Container';
+import Header from '@components/common/Header';
+import ExerciseLog from '@components/ExerciseLog';
+import React from 'react';
 
-const Exerciselog = () => {
+const Home = () => {
   return (
-    <div className="w-[1440px] h-[1024px] flex justify-center content-center my-auto">
-      <Container>
-        <ExerciseLog />
-      </Container>
-    </div>
+    <Auth auth={true}>
+      <div className="w-[90%] h-[90%] w-max-[1440px] h-max-[1024px] flex justify-center content-center my-auto ">
+        <Container>
+          <Header />
+          <ExerciseLog />
+        </Container>
+      </div>
+    </Auth>
   );
 };
 
-export default Exerciselog;
+export default Home;

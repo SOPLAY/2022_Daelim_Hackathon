@@ -1,17 +1,16 @@
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { status } = useSession();
-
-  if (status === 'unauthenticated' || req.method !== 'GET')
+  const session = await getSession({ req });
+  if (session === null || req.method !== 'GET')
     return res
       .status(404)
-      .json({ success: false, message: '잘못된 접근입니다.' });
+      .json({ success: false, message: '잘못된  접근입니다.' });
 
   let { q } = req.query;
   q = typeof q === 'object' ? q[0] : q;

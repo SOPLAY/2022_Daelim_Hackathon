@@ -1,22 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import type { NextPage } from 'next';
-import { Main } from 'next/document';
-import Head from 'next/head';
-import Image from 'next/image';
-import { Children } from 'react';
+
 import Container from '../core/components/common/Container';
 import MainPage from '../core/components/MainPage/index';
-import BodyContainer from '../core/components/common/BodyContainer';
+
+import Header from '@components/common/Header';
+import Auth from '@components/common/Auth';
 
 const Home: NextPage = () => {
-  const ref = useRef(null);
-
   return (
-    <div className='w-[1440px] h-[1024px] flex justify-center content-center my-auto'>
-      <Container>
-        <MainPage />
-      </Container>
-    </div>
+    <Auth auth={true}>
+      <div className="w-[90%] h-[90%] w-max-[1440px] h-max-[1024px] flex justify-center content-center my-auto">
+        <Container>
+          <Header />
+          <MainPage />
+        </Container>
+      </div>
+    </Auth>
   );
 };
 
