@@ -10,12 +10,12 @@ const index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const myData = [];
   const getUserData = async () => {
-    // setIsLoading(true);
+    setIsLoading(true);
     let data = await api.user
       .get({ date: new Date().toLocaleDateString() })
       .then((res) => setUserData(res.data.data))
-      .catch((err) => console.log(err.response.data));
-    // setIsLoading(false);
+      .catch((err) => setUserData([false]));
+    setIsLoading(false);
     return data;
   };
   useEffect(() => {
@@ -58,7 +58,7 @@ const index = () => {
                   <Loading type="summary" />
                   <Loading type="summary" />
                 </>
-              ) : myData.length ? (
+              ) : myData.length && myData[0] !== false ? (
                 myData.map((v) => {
                   return (
                     <div
@@ -117,11 +117,13 @@ const index = () => {
               )}
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center w-full h-1/4 border-white border-t-2">
-            <div className="flex flex-col w-[80%]  bg-white/30 rounded-[10px] border backdrop-blur-md drop-shadow-xl z-10 items-center">
-              <h2 className="mx-auto my-auto">Total Volume: {totalVol}</h2>
+          {!isLoading && (
+            <div className="flex flex-col justify-center items-center w-full h-1/4 border-white border-t-2">
+              <div className="flex flex-col w-[80%]  bg-white/30 rounded-[10px] border backdrop-blur-md drop-shadow-xl z-10 items-center">
+                <h2 className="mx-auto my-auto">Total Volume: {totalVol}</h2>
+              </div>
             </div>
-          </div>
+          )}
         </Container>
       </div>
     </div>
